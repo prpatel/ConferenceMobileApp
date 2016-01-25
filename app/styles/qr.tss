@@ -1,0 +1,12 @@
+".container[platform=ios]" : {
+	backgroundColor: "#fff",
+	barColor: "#699F27",
+	title: L("tab4_title"),
+	orientationModes: [Ti.UI.PORTRAIT,Ti.UI.UPSIDE_PORTRAIT],
+	layout:"vertical",
+	statusBarStyle:Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
+}
+
+"#qrview":{
+	backgroundColor: 'red'
+}

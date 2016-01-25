@@ -1,0 +1,5 @@
+<Alloy>
+	<Window id = "qrwindow" class="container">
+			<View id = "qrview"/>
+	</Window>
+</Alloy>

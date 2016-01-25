@@ -1,0 +1,17 @@
+<Alloy>
+  <Window id="talkdetails" class="container">
+    <View id="banner" class="banner">
+    		<ImageView id = "bannerImage"/>
+    	</View>
+    <ScrollView class="scrollview" >
+      <View class="titlebox" layout="vertical">
+        <Label id="talktitle"/>
+        <Label id="time"/>
+        <Label id="room"/>
+      </View>
+      <Label id="description"/>
+      <Label id="speaker"/>
+      <Label id="speakerbio"/>
+    </ScrollView>
+  </Window>
+</Alloy>

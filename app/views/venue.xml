@@ -1,0 +1,25 @@
+<Alloy>
+	<Window class="container">
+		<ScrollView class="scrollview">
+			<View class="titlecontainer">
+				<Label class="venuetitle"/>
+			</View>
+			<View class="venueimage"/>
+			<View class="addressrow">
+				<ImageView class="mapicon"/>
+				<Label id="maptext" class="maptext" onClick="clickmap" />
+			</View>
+			<View class="phonerow">
+				<ImageView class="phoneicon"/>
+				<Label id="phonetext" class="phonetext" onClick="clickcall" />
+			</View>
+			<Label class="venuedescription"></Label>
+			<View>
+				<ImageView id = "sitemap300"/>
+			</View>
+			<View>
+				<ImageView id = "sitemap400"/>
+			</View>
+		</ScrollView>
+	</Window>
+</Alloy>

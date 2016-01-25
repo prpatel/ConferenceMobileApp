@@ -1,0 +1,19 @@
+<Alloy>
+	<Window class="container">
+		<RightNavButton platform=ios>
+                    <Button title="Refresh" onClick="refreshSchedule" />
+    </RightNavButton>
+		<TabbedBar id="dayoptions" platform="ios" onClick="changeday">
+            <Labels>
+                <Label class="day1button"/>
+                <Label class="day2button"/>
+                <Label class="day3button"/>
+            </Labels>
+        </TabbedBar>
+        <ScrollableView id="scrollableView" onScroll="pageChange">
+            <Require src="day1"/>
+            <Require src="day2"/>
+            <Require src="day3"/>
+        </ScrollableView>
+	</Window>
+</Alloy>

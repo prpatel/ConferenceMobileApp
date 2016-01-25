@@ -1,0 +1,1 @@
+module.exports={"dependencies":{},"venueAddress":"Two Galleria Parkway, Atlanta, GA 30339","venuePhoneNumber":"770-955-8000","twitterHashTag":"#devnexus","twitterConsumerKey":"cKT2aSrZ9CXKTM1XKNntA","twitterConsumerSecret":"jm6R4Z9GDCKxdKVOQUV2X418xYJvJOM7vqFidQZKoE","youtubeUser":"devnexus"};
