@@ -2,7 +2,7 @@
 	<TableViewRow id="row" class="row" rowId="">
 		<View class="rowwrapper">
       <View class="timecol">
-        <Label id="time" class="timecaption">8am-9am</Label>
+        <Label id="track" class="track">8am-9am</Label>
         <Label id="location" class="locationcaption">Main Room</Label>
       </View>
       <View class="descriptioncol">

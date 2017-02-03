@@ -121,7 +121,7 @@
 	color: "#4F4E4E"
 }
 
-"#sitemap":{
+".sitemap":{
 	width: Titanium.Platform.displayCaps.platformWidth,
 	height: Ti.UI.SIZE
 }

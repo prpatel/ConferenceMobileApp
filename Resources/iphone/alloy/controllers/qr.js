@@ -70,6 +70,26 @@ function Controller() {
         });
         table.data = data;
     }
+    function clearTableData() {
+        var data = [];
+        var dialog = Ti.UI.createAlertDialog({
+            cancel: 1,
+            buttonNames: [ "DELETE DATA", "Cancel" ],
+            message: "ARE YOU SURE? This will permanently delete the data you have scanned",
+            title: "DELETE ALL DATA"
+        });
+        dialog.addEventListener("click", function(e) {
+            if (e.index === e.source.cancel) Ti.API.info("\n\nThe cancel button was clicked"); else {
+                Ti.API.info("\ndeleteing all data");
+                Ti.App.Properties.setObject("savedContactsJson", data);
+                data.push({
+                    title: "no contacts saved"
+                });
+                table.data = data;
+            }
+        });
+        dialog.show();
+    }
     function vcardToCsv(vcard) {
         var memo = "";
         _.each(vcard, function(i) {
@@ -79,11 +99,15 @@ function Controller() {
     }
     function normalizeVcard(data) {
         var newData = {};
-        newData.email = data.email;
-        newData.name = data.n;
+        newData.email = data.email && data.email[0] ? data.email[0].value : "";
+        newData.name = separateName(data.n);
         newData.org = data.org;
         newData.title = data.title;
         return newData;
+    }
+    function separateName(name) {
+        var names = name.split(";");
+        return names[0] + "," + names[1];
     }
     function emailData() {
         var csvData = "";
@@ -139,14 +163,22 @@ function Controller() {
     $.qrview.backgroundColor = "#699F27";
     var qrreader = require("com.acktie.mobile.ios.qr");
     $.qrview.layout = "absolute";
+    var clearScannedButton = Ti.UI.createButton({
+        title: "Clear data"
+    });
+    clearScannedButton.addEventListener("click", function() {
+        clearTableData();
+    });
     var testBtn = Ti.UI.createButton({
-        title: "Email collected badge data",
-        left: 20
+        title: "Email data"
     });
     testBtn.addEventListener("click", function() {
         emailData();
     });
     var table = Ti.UI.createTableView({});
+    table.addEventListener("click", function(e) {
+        alert(JSON.stringify(e.row.title));
+    });
     updateTableData();
     var qrcontrolsview = Titanium.UI.createView({
         width: "100%",
@@ -163,6 +195,7 @@ function Controller() {
         bottom: 0
     });
     tableView.add(testBtn);
+    tableView.add(clearScannedButton);
     tableView.add(table);
     $.qrview.add(tableView);
     var options = {

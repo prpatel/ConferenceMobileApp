@@ -10,7 +10,7 @@ function __processArg(obj, key) {
 function Controller() {
     function tableclick(evt) {
         var talkDetails = require("schedulemod").getTalkDetails(dayTag, evt.row.rowId);
-        console.log(talkDetails);
+        console.log("tableclick from controller");
         require("schedulemod").tableClick(evt, talkDetails, dayTag);
     }
     function tablescroll(evt) {

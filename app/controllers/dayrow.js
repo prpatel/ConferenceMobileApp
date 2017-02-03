@@ -1,6 +1,6 @@
 var args = arguments[0] || {};
 $.row.rowId       = args.index;
-$.time.text       = args.time;
+$.track.text       = args.track;
 $.location.text     = args.room;
 $.talkname.text     = args.title;
 $.speaker.text      = args.speaker;

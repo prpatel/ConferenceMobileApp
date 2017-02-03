@@ -42,7 +42,7 @@ function Controller() {
         id: "__alloyId25"
     });
     $.__views.__alloyId24.add($.__views.__alloyId25);
-    $.__views.time = Ti.UI.createLabel({
+    $.__views.track = Ti.UI.createLabel({
         left: "5",
         top: "0",
         color: "#000",
@@ -51,9 +51,9 @@ function Controller() {
             fontWeight: "bold"
         },
         text: "8am-9am",
-        id: "time"
+        id: "track"
     });
-    $.__views.__alloyId25.add($.__views.time);
+    $.__views.__alloyId25.add($.__views.track);
     $.__views.location = Ti.UI.createLabel({
         left: "5",
         top: "7",
@@ -105,7 +105,7 @@ function Controller() {
     _.extend($, $.__views);
     var args = arguments[0] || {};
     $.row.rowId = args.index;
-    $.time.text = args.time;
+    $.track.text = args.track;
     $.location.text = args.room;
     $.talkname.text = args.title;
     $.speaker.text = args.speaker;

@@ -15,10 +15,10 @@
 			</View>
 			<Label class="venuedescription"></Label>
 			<View>
-				<ImageView id = "sitemap300"/>
+				<ImageView id = "sitemap300" class="sitemap"/>
 			</View>
 			<View>
-				<ImageView id = "sitemap400"/>
+				<ImageView id = "sitemap400" class="sitemap"/>
 			</View>
 		</ScrollView>
 	</Window>

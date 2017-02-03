@@ -1,6 +1,6 @@
 var moment = require('moment.min');
 function loadSchedule(serverJsonData) {
-	if (serverJsonData || !Ti.App.Properties.getBool('scheduleloaded')) {
+	if (serverJsonData || !Ti.App.Properties.getBool('scheduleloaded2017')) {
 		var contents;
 		if (serverJsonData) {
 			console.log('loading from server');
@@ -34,6 +34,7 @@ function loadSchedule(serverJsonData) {
 				days[currentDayNum].push({
 					index : currentDayIndex,
 					time : currentSlot.format("LT"),
+					timeSlot: currentSlot.format("dddd h:mm A"),
 					room : it.room.name,
 					title : it.title,
 					description : it.title
@@ -49,6 +50,7 @@ function loadSchedule(serverJsonData) {
 				days[currentDayNum].push({
 					index : currentDayIndex,
 					time : currentSlot.format("LT"),
+					timeSlot: currentSlot.format("dddd h:mm A"),
 					room : it.room.name,
 					title : tempTitle,
 					speaker : speakerInfo,
@@ -73,7 +75,9 @@ function loadSchedule(serverJsonData) {
 				}
 				days[currentDayNum].push({
 					index : currentDayIndex,
+					track: it.presentation.track.name,
 					time : currentSlot.format("LT"),
+					timeSlot: currentSlot.format("dddd h:mm A"),
 					room : it.room.name,
 					title : it.presentation.title,
 					speaker : speakerInfo,
@@ -87,7 +91,7 @@ function loadSchedule(serverJsonData) {
 				// console.log('pushing day'+it + ' into props manager' + days);
 				Ti.App.Properties.setObject('day' + key, days[key]);
 			}
-		Ti.App.Properties.setBool('scheduleloaded', true);
+		Ti.App.Properties.setBool('scheduleloaded2017', true);
 	}
 }
 
@@ -102,12 +106,24 @@ function loadTable(tableObject, dayTag) {
 		if (baseTime == item.time ) {
 			// do nothing
 		} else {
-			if (baseTime !== 'first') {
-				tableData.push(Ti.UI.createTableViewRow({
-					height: 5,
-					backgroundColor: '#CE741D'
-				}));
-			}
+			// if (baseTime !== 'first') {
+				var timeLabel = Ti.UI.createLabel({
+					backgroundColor: '#CE741D',
+					text: item.timeSlot,
+					textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+					width: Ti.UI.SIZE, height: Ti.UI.SIZE,
+					color: 'white',
+				})
+				// headerTitle: item.timeSlot,
+				var tvs = Ti.UI.createTableViewSection({
+					headerView: timeLabel
+				});
+				tableData.push(tvs)
+				// tableData.push(Ti.UI.createTableViewRow({
+				// 	height: 5,
+				// 	backgroundColor: '#CE741D'
+				// }));
+			// }
 			baseTime = item.time;
 
 		}
@@ -120,6 +136,7 @@ function loadTable(tableObject, dayTag) {
 }
 
 function tableClick(evt, talkDetails, dayTag) {
+	console.log('tableClick:' + evt + ' ' + talkDetails);
 	var w = Alloy.createController('talkdetails', {
 		rowId : evt.row.rowId,
 		talkDetails : talkDetails,

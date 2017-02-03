@@ -1,18 +1,18 @@
 <resources>
-	<string name="app_title">DevNexus 2016</string>
+	<string name="app_title">DevNexus 2017</string>
 	<string name="tab1_title">DevNexus Schedule</string>
 	<string name="tab2_title">Venue</string>
 	<string name="tab3_title">Conversation</string>
 	<string name="tab4_title">QR Scanner</string>
-	<string name="day1_caption">Mon</string>
-	<string name="day2_caption">Tues</string>
-	<string name="day3_caption">Wed</string>
+	<string name="day1_caption">Wed</string>
+	<string name="day2_caption">Thurs</string>
+	<string name="day3_caption">Fri</string>
     <string name="presented_by">Presented by %s</string>
     <string name="about">About %s</string>
     <string name="refresh">Refresh</string>
     <string name="refreshing">Refreshing...</string>
     <string name="offline_error">Make sure you have an active Internet connection.</string>
-    <string name="venue_title">Devnexus 2016 will take place in Atlanta, GA, U.S.A.</string>
-    <string name="venue_description">The Georgia World Congress Center (GWCC) is a world class facility located in the heart of downtown Atlanta. It is a few minutes walk from the MARTA train system and have ample parking</string>
+    <string name="venue_title">Devnexus 2017 will take place in Atlanta, GA, U.S.A.</string>
+    <string name="venue_description">The Georgia World Congress Center (GWCC) is a world class facility located in the heart of downtown Atlanta. It is a few minutes walk from the MARTA train system and has ample parking. PARKING: Park in the RED DECK at the GWCC. You will have received an email with the PARKING CODE THAT WILL BE SCANNED UPON ENTRY FOR FREE PARKING.</string>
     <string name="no_phone">Unable to initiate a phone call on this device.</string>
 </resources>

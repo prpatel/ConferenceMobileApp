@@ -68,14 +68,24 @@ function scanQRFromCamera(qrCodeWindow, options) {
 }
 
 // userControlLight : false
+var clearScannedButton = Ti.UI.createButton({
+	title: 'Clear data',
+	// left: 20
+})
 
+clearScannedButton.addEventListener('click',function(e) {
+	 clearTableData();
+});
 var testBtn = Ti.UI.createButton({
-  title: 'Email collected badge data',
-	left: 20
+  title: 'Email data',
+	// left: 20
 });
 testBtn.addEventListener('click',function(e) {
   //  Titanium.API.info("You clicked the button");
-  //  data = "BEGIN:VCARD\nN:Patel;Pratik\nEMAIL:pratik.r.patel@gmail.com\nORG:ORGANIZER\nTITLE:Sponsor\nEND:VCARD";
+  //  var data = "BEGIN:VCARD\nN:Patel;Pratik\nEMAIL:pratik.r.patel@gmail.com\nORG:ORGANIZER\nTITLE:Sponsor\nEND:VCARD";
+	// BEGIN:VCARD\nVERSION:2.1\nN:Patel;Pratik\nFN:Pratik Patel\nORG:AJUG\nTITLE:\nEMAIL;PREF;INTERNET:pratik.r.patel@gmail.com\nEND:VCARD
+	 //
+	//  storeNewQRScan(data);
 	 emailData();
 });
 
@@ -108,9 +118,37 @@ function updateTableData() {
 	table.data = data;
 }
 
+function clearTableData() {
+	var data = [];
+	// Ti.App.Properties.setObject('givenName', 'Paul');
+
+	var dialog = Ti.UI.createAlertDialog({
+    cancel: 1,
+    buttonNames: ['DELETE DATA', 'Cancel'],
+    message: 'ARE YOU SURE? This will permanently delete the data you have scanned',
+    title: 'DELETE ALL DATA'
+  });
+  dialog.addEventListener('click', function(e){
+    if (e.index === e.source.cancel){
+      Ti.API.info('\n\nThe cancel button was clicked');
+    } else {
+			Ti.API.info('\n\deleteing all data');
+			Ti.App.Properties.setObject('savedContactsJson', data);
+			data.push({'title':'no contacts saved'});
+			table.data = data;
+		}
+
+  });
+  dialog.show();
+}
+
 var table = Ti.UI.createTableView({
 
 });
+
+table.addEventListener('click', function(e) {
+	alert(JSON.stringify(e.row.title));
+})
 
 // var parsedvcard = vcard.parse(data);
 function vcardToCsv(vcard) {
@@ -123,11 +161,25 @@ function vcardToCsv(vcard) {
 
 function normalizeVcard(data) {
   var newData = {};
-  newData.email = data.email;
-  newData.name = data.n;
+	//
+	if (data.email) {
+		if (data.email[0]) {
+				newData.email = data.email[0].value
+		} else {
+			  newData.email = "";
+		}
+	} else {
+		newData.email = "";
+	}
+  newData.name = separateName(data.n);
   newData.org = data.org;
   newData.title = data.title;
   return newData;
+}
+
+function separateName(name) {
+	var names = name.split(";");
+	return names[0] + ','+names[1];
 }
 
 function emailData() {
@@ -171,6 +223,7 @@ var tableView = Titanium.UI.createView({
 	 bottom: 0
 });
 tableView.add(testBtn);
+tableView.add(clearScannedButton);
 tableView.add(table);
 $.qrview.add(tableView);
 var options = {

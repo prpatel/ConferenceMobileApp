@@ -1,5 +1,5 @@
 function loadSchedule(serverJsonData) {
-    if (serverJsonData || !Ti.App.Properties.getBool("scheduleloaded")) {
+    if (serverJsonData || !Ti.App.Properties.getBool("scheduleloaded2017")) {
         var contents;
         if (serverJsonData) {
             console.log("loading from server");
@@ -26,6 +26,7 @@ function loadSchedule(serverJsonData) {
             if ("ADMINISTRATIVE" == it.scheduleItemType || "BREAK" == it.scheduleItemType || "REGISTRATION" == it.scheduleItemType) days[currentDayNum].push({
                 index: currentDayIndex,
                 time: currentSlot.format("LT"),
+                timeSlot: currentSlot.format("dddd h:mm A"),
                 room: it.room.name,
                 title: it.title,
                 description: it.title
@@ -35,6 +36,7 @@ function loadSchedule(serverJsonData) {
                 days[currentDayNum].push({
                     index: currentDayIndex,
                     time: currentSlot.format("LT"),
+                    timeSlot: currentSlot.format("dddd h:mm A"),
                     room: it.room.name,
                     title: tempTitle,
                     speaker: speakerInfo,
@@ -52,7 +54,9 @@ function loadSchedule(serverJsonData) {
                 if (void 0 == it.presentation.speakers) var speakerId = "TBD"; else var speakerId = it.presentation.speakers[0].id;
                 days[currentDayNum].push({
                     index: currentDayIndex,
+                    track: it.presentation.track.name,
                     time: currentSlot.format("LT"),
+                    timeSlot: currentSlot.format("dddd h:mm A"),
                     room: it.room.name,
                     title: it.presentation.title,
                     speaker: speakerInfo,
@@ -63,7 +67,7 @@ function loadSchedule(serverJsonData) {
             }
         });
         for (var key in days) Ti.App.Properties.setObject("day" + key, days[key]);
-        Ti.App.Properties.setBool("scheduleloaded", true);
+        Ti.App.Properties.setBool("scheduleloaded2017", true);
     }
 }
 
@@ -76,10 +80,18 @@ function loadTable(tableObject, dayTag) {
     var baseTime = "first";
     Ti.App.Properties.getObject(dayTag).forEach(function(item, index) {
         if (baseTime == item.time) ; else {
-            "first" !== baseTime && tableData.push(Ti.UI.createTableViewRow({
-                height: 5,
-                backgroundColor: "#CE741D"
-            }));
+            var timeLabel = Ti.UI.createLabel({
+                backgroundColor: "#CE741D",
+                text: item.timeSlot,
+                textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+                width: Ti.UI.SIZE,
+                height: Ti.UI.SIZE,
+                color: "white"
+            });
+            var tvs = Ti.UI.createTableViewSection({
+                headerView: timeLabel
+            });
+            tableData.push(tvs);
             baseTime = item.time;
         }
         item.index = index;
@@ -90,6 +102,7 @@ function loadTable(tableObject, dayTag) {
 }
 
 function tableClick(evt, talkDetails, dayTag) {
+    console.log("tableClick:" + evt + " " + talkDetails);
     var w = Alloy.createController("talkdetails", {
         rowId: evt.row.rowId,
         talkDetails: talkDetails,

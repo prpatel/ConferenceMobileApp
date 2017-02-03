@@ -31,9 +31,9 @@
 	 layout:"vertical"
 }
 
-".timecaption[platform=android]":{
-	left:"5", 
-	top:"0", 
+".track[platform=android]":{
+	left:"5",
+	top:"0",
 	color:"#000",
 	font:{
 		fontSize: 16,
@@ -41,9 +41,9 @@
 	}
 }
 
-".timecaption[platform=ios]":{
-	left:"5", 
-	top:"0", 
+".track[platform=ios]":{
+	left:"5",
+	top:"0",
 	color:"#000",
 	font:{
 		fontSize: 16,
@@ -52,8 +52,8 @@
 }
 
 ".locationcaption[platform=android]":{
-	left:"5", 
-	top:"8", 
+	left:"5",
+	top:"8",
 	color:"#000",
 	font:{
 		fontSize: 16,
@@ -62,8 +62,8 @@
 }
 
 ".locationcaption[platform=ios]":{
-	left:"5", 
-	top:"7", 
+	left:"5",
+	top:"7",
 	color:"#000",
 	font:{
 		fontSize: 16,
